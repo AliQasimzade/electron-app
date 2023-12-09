@@ -28,6 +28,11 @@ const User = new UserSchema({
         type: String,
         require: false,
         default: null
+    },
+    basket:{
+         type:Array,
+         require: false,
+         defaul: []
     }
 }, { timestamps: true })
 

@@ -5,18 +5,23 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "watch:db": "nodemon server.js"
+    "watch:db": "nodemon server.js",
+    "sql:watch": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "convert-base64-to-image": "^0.0.16",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "image-convert": "^0.1.33",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.2",
+    "png-to-jpeg": "^1.0.1"
   }
 }

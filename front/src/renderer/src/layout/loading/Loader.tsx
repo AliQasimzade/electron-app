@@ -1,9 +1,8 @@
+import "./Loader.css";
 
 const Loader = ():JSX.Element => {
   return (
-    <div>
-      Loading...
-    </div>
+    <div className="loader"></div>
   )
 }
 
