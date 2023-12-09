@@ -31,9 +31,15 @@ const AppRoutes = () => {
 
                         </>
                     }
-
+                    <Route path="login" element={
+                        <Suspense fallback={<Loader />}>
+                            <Login />
+                        </Suspense>
+                    } />
                     <Route path="register" element={
-                        <Register />
+                        <Suspense fallback={<Loader />}>
+                            <Register />
+                        </Suspense>
                     } />
 
                     <Route path="reset-password" element={

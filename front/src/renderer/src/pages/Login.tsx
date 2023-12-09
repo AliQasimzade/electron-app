@@ -69,8 +69,6 @@ const Login = (): JSX.Element => {
                 setTimeout(() => query.refetch(), 1000)
                 return decoded.id;
             } else {
-
-
                 throw new Error(request.data)
             }
         } catch (error: any) {
@@ -95,6 +93,7 @@ const Login = (): JSX.Element => {
             try {
                 await mutation.mutateAsync(values)
             } catch (error: any) {
+                setLoading(false)
                 console.log(error.message);
 
             }
@@ -115,7 +114,7 @@ const Login = (): JSX.Element => {
             </Helmet>
 
             <div className="d-flex login_form col-6 align-items-center mx-auto">
-                <div className="bg-body w-100 d-flex flex-column flex-center rounded-4 w-md-600px p-5">
+                <div className="bg-body w-100 d-flex flex-column flex-center rounded-4 w-md-600px p-5 mx-auto">
                     <form className="d-flex flex-column gap-3 w-50 m-auto" onSubmit={submitHandle}>
                         <h2 className="w-100 text-center">Login Page</h2>
                         <div className="field d-flex flex-column gap-2">
@@ -159,14 +158,14 @@ const Login = (): JSX.Element => {
                             }
                         </div>
                         <div className="forgot_password_container d-flex justify-content-end w-100">
-                            <Link className="text-primary text-decoration-none" to="/reset-password">Forgot Password ?</Link>
+                            <Link className="link-primary fw-semibold" to="/reset-password">Forgot Password ?</Link>
                         </div>
                         <button type="submit" disabled={loading} className="btn btn-primary">{loading ? "Please wait..." : "Login"}</button>
                     </form>
                     <div className="not_a_member_yet mt-2">
                         <p className="d-flex align-items-center flex-wrap w-100 justify-content-center">
-                            <span className="text-secondary">Not a member yet ? </span>
-                            <Link className="text-primary text-decoration-none" to="/register">Sign Up</Link>
+                            <span className="text-gray-500">Not a member yet ? </span>
+                            <Link className="link-primary fw-semibold" to="/register">Sign Up</Link>
                         </p>
                     </div>
                 </div>
