@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, UseMutationResult, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { jwtDecode } from "jwt-decode";
 import { JWTResponse } from "@renderer/types.d";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@renderer/redux-store/store";
 import { getUser } from "@renderer/redux-store/slices/userSlice";
 interface LoginFields {
     email: string,
@@ -23,7 +23,7 @@ const loginSchema = Yup.object().shape({
 
 const Login = (): JSX.Element => {
 
-    const dispacth = useDispatch()
+    const dispacth = useAppDispatch()
     const navigate = useNavigate()
     const [loginFields] = useState<LoginFields>({
         email: "",

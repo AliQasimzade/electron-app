@@ -1,17 +1,28 @@
 import PageTtle from '@renderer/components/PageTitle/PageTtle';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import { useAppDispatch } from '@renderer/redux-store/store';
+import { setTheme } from '@renderer/redux-store/slices/themeSlice';
+import { useAppSelctor } from '@renderer/redux-store/store';
 const Header = (): JSX.Element => {
     const { pathname } = useLocation()
 
+    const themeMode = useAppSelctor(state => state.persistedReducer.theme.theme)
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-bs-theme', themeMode)
+    }, [themeMode])
+
+    const dispatch = useAppDispatch();
     const [selectSearchDropdown, setSelectSearchDropdown] = useState<boolean>(false);
     const [selectNotifyDropdown, setSelectNotifyDropdown] = useState<boolean>(false)
     const [selectUserDropDown, setSelectUserDropDown] = useState<boolean>(false)
+    const [selectThemeDarkLightDropDown, setSelectThemeDarkLightDropDown] = useState<boolean>(false)
+
     const searchDropRef = useRef<HTMLElement | null>(null);
     const notifyDropRef = useRef<HTMLElement | null>(null);
     const userDropRef = useRef<HTMLElement | null>(null);
-
+    const themeDropRef = useRef<HTMLElement | null>(null);
 
     const handleShowSearchDropDown = () => {
 
@@ -24,6 +35,11 @@ const Header = (): JSX.Element => {
             userDropRef.current.classList.remove('show')
             userDropRef.current?.removeAttribute('data-popper-placement')
             setSelectUserDropDown(false)
+        }
+        if (themeDropRef.current) {
+            themeDropRef.current.classList.remove('show')
+            themeDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectThemeDarkLightDropDown(false)
         }
         if (selectSearchDropdown == false) {
             if (searchDropRef.current) {
@@ -51,6 +67,11 @@ const Header = (): JSX.Element => {
             userDropRef.current?.removeAttribute('data-popper-placement')
             setSelectUserDropDown(false)
         }
+        if (themeDropRef.current) {
+            themeDropRef.current.classList.remove('show')
+            themeDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectThemeDarkLightDropDown(false)
+        }
         if (selectNotifyDropdown == false) {
             if (notifyDropRef.current) {
                 notifyDropRef.current.classList.add('show')
@@ -77,6 +98,11 @@ const Header = (): JSX.Element => {
             notifyDropRef.current?.removeAttribute('data-popper-placement')
             setSelectNotifyDropdown(false)
         }
+        if (themeDropRef.current) {
+            themeDropRef.current.classList.remove('show')
+            themeDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectThemeDarkLightDropDown(false)
+        }
         if (selectUserDropDown == false) {
             if (userDropRef.current) {
                 userDropRef.current.classList.add('show')
@@ -89,6 +115,47 @@ const Header = (): JSX.Element => {
                 userDropRef.current?.removeAttribute('data-popper-placement')
                 setSelectUserDropDown(false)
             }
+        }
+    }
+
+    const handleThemeLightDarkDrop = () => {
+        if (searchDropRef.current) {
+            searchDropRef.current.classList.remove('show')
+            searchDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectSearchDropdown(false)
+        }
+        if (notifyDropRef.current) {
+            notifyDropRef.current.classList.remove('show')
+            notifyDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectNotifyDropdown(false)
+        }
+        if (userDropRef.current) {
+            userDropRef.current.classList.remove('show')
+            userDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectUserDropDown(false)
+        }
+        if (selectThemeDarkLightDropDown == false) {
+            if (themeDropRef.current) {
+                themeDropRef.current.classList.add('show')
+                themeDropRef.current?.setAttribute('data-popper-placement', 'bottom-end')
+                setSelectThemeDarkLightDropDown(true)
+            }
+        } else {
+            if (themeDropRef.current) {
+                themeDropRef.current.classList.remove('show')
+                themeDropRef.current?.removeAttribute('data-popper-placement')
+                setSelectThemeDarkLightDropDown(false)
+            }
+        }
+
+    }
+
+    const handleChangeTheme = (mode: string) => {
+        dispatch(setTheme(mode));
+        if (themeDropRef.current) {
+            themeDropRef.current.classList.remove('show')
+            themeDropRef.current?.removeAttribute('data-popper-placement')
+            setSelectThemeDarkLightDropDown(false)
         }
     }
     return (
@@ -136,7 +203,7 @@ const Header = (): JSX.Element => {
                                 </form>
                                 {/*end::Form*/}
                                 {/*begin::Menu*/}
-                                <div data-kt-search-element="content" ref={(node) => (searchDropRef.current = node)} className="menu menu-sub menu-sub-dropdown py-7 px-7 overflow-hidden w-300px w-md-350px" style={selectSearchDropdown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-306px, 106.5px, 0px)' } : {}} data-kt-menu="true">
+                                <div data-kt-search-element="content" ref={(node) => (searchDropRef.current = node)} className="menu menu-sub menu-sub-dropdown py-7 px-7 overflow-hidden w-300px w-md-350px" style={selectSearchDropdown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-541px, 106.5px, 0px)' } : {}} data-kt-menu="true">
                                     {/*begin::Wrapper*/}
                                     <div data-kt-search-element="wrapper">
                                         {/*begin::Recently viewed*/}
@@ -744,7 +811,7 @@ const Header = (): JSX.Element => {
                                     <i className="ki-duotone ki-notification-bing fs-1"><span className="path1" /><span className="path2" /><span className="path3" /></i>                        <span className="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink" />
                                 </a>
                                 {/*begin::Menu*/}
-                                <div className="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" style={selectNotifyDropdown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-253.5px, 107px, 0px)' } : {}} data-kt-menu="true" ref={(node) => (notifyDropRef.current = node)} id="kt_menu_notifications">
+                                <div className="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" style={selectNotifyDropdown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-478.5px, 107px, 0px)' } : {}} data-kt-menu="true" ref={(node) => (notifyDropRef.current = node)} id="kt_menu_notifications">
                                     {/*begin::Heading*/}
                                     <div className="d-flex flex-column bgi-no-repeat rounded-top" style={{ backgroundImage: 'url("assets/media/misc/menu-header-bg.jpg")' }}>
                                         {/*begin::Title*/}
@@ -1214,7 +1281,7 @@ const Header = (): JSX.Element => {
                                 <a href="#" className="btn btn-icon btn-custom btn-active-color-primary" onClick={handleShowUserDrop} data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                                     <i className="ki-duotone ki-user fs-1"><span className="path1" /><span className="path2" /></i>                  </a>
                                 {/*begin::User account menu*/}
-                                <div className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" ref={(node) => (userDropRef.current = node)} style={selectUserDropDown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-200px, 107px, 0px)' } : {}} data-kt-menu="true">
+                                <div className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" ref={(node) => (userDropRef.current = node)} style={selectUserDropDown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-426px, 107px, 0px)' } : {}} data-kt-menu="true">
                                     {/*begin::Menu item*/}
                                     <div className="menu-item px-3">
                                         <div className="menu-content d-flex align-items-center px-3">
@@ -1409,14 +1476,14 @@ const Header = (): JSX.Element => {
                             {/*begin::Theme mode*/}
                             <div className="d-flex align-items-center me-3">
                                 {/*begin::Menu toggle*/}
-                                <a href="#" className="btn btn-icon btn-custom btn-active-color-primary" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                <a href="#" className="btn btn-icon btn-custom btn-active-color-primary" onClick={handleThemeLightDarkDrop} data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                                     <i className="ki-duotone ki-night-day theme-light-show fs-1"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>    <i className="ki-duotone ki-moon theme-dark-show fs-1"><span className="path1" /><span className="path2" /></i></a>
                                 {/*begin::Menu toggle*/}
                                 {/*begin::Menu*/}
-                                <div className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="theme-mode-menu">
+                                <div ref={(node) => (themeDropRef.current = node)} className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" style={selectThemeDarkLightDropDown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate(-376px, 107px)' } : {}} data-kt-menu="true" data-kt-element="theme-mode-menu">
                                     {/*begin::Menu item*/}
                                     <div className="menu-item px-3 my-0">
-                                        <a href="#" className="menu-link px-3 py-2 active" data-kt-element="mode" data-kt-value="light">
+                                        <a href="#" className="menu-link px-3 py-2 active" data-kt-element="mode" data-kt-value="light" onClick={() => handleChangeTheme('light')}>
                                             <span className="menu-icon" data-kt-element="icon">
                                                 <i className="ki-duotone ki-night-day fs-2"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>          </span>
                                             <span className="menu-title">
@@ -1427,7 +1494,7 @@ const Header = (): JSX.Element => {
                                     {/*end::Menu item*/}
                                     {/*begin::Menu item*/}
                                     <div className="menu-item px-3 my-0">
-                                        <a href="#" className="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
+                                        <a href="#" className="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark" onClick={() => handleChangeTheme('dark')}>
                                             <span className="menu-icon" data-kt-element="icon">
                                                 <i className="ki-duotone ki-moon fs-2"><span className="path1" /><span className="path2" /></i>          </span>
                                             <span className="menu-title">
@@ -1438,7 +1505,7 @@ const Header = (): JSX.Element => {
                                     {/*end::Menu item*/}
                                     {/*begin::Menu item*/}
                                     <div className="menu-item px-3 my-0">
-                                        <a href="#" className="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
+                                        <a href="#" className="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system" onClick={() => handleChangeTheme('light')}>
                                             <span className="menu-icon" data-kt-element="icon">
                                                 <i className="ki-duotone ki-screen fs-2"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /></i>          </span>
                                             <span className="menu-title">

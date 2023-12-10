@@ -172,7 +172,7 @@ const getUserById = async (req, res) => {
 
         if (hasToken === "success") {
             const { id } = req.params;
-            const checkUserById = await Users.findOne({ _id: id });
+            const checkUserById = await Users.findOne({ _id: id }, {password: 0});
 
             if (!checkUserById) throw new Error("No such user");
 
