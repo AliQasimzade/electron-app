@@ -201,6 +201,7 @@ const Header = (): JSX.Element => {
                                         <i className="ki-duotone ki-cross fs-2 fs-lg-1 me-0"><span className="path1" /><span className="path2" /></i>  </span>
                                     {/*end::Reset*/}
                                 </form>
+                                
                                 {/*end::Form*/}
                                 {/*begin::Menu*/}
                                 <div data-kt-search-element="content" ref={(node) => (searchDropRef.current = node)} className="menu menu-sub menu-sub-dropdown py-7 px-7 overflow-hidden w-300px w-md-350px" style={selectSearchDropdown ? { zIndex: '107', position: 'fixed', inset: '0px 0px auto auto', margin: '0', transform: 'translate3d(-541px, 106.5px, 0px)' } : {}} data-kt-menu="true">
