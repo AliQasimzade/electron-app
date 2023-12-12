@@ -35,4 +35,4 @@ export const store: any = configureStore({
 
 export const persistor = persistStore(store)
 export const useAppDispatch: () => typeof store.dispatch = useDispatch
-export const useAppSelctor: TypedUseSelectorHook<ReturnType<typeof store.getState>> = useSelector
+export const useAppSelector: TypedUseSelectorHook<ReturnType<typeof store.getState>> = useSelector

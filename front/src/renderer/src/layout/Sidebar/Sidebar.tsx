@@ -1,11 +1,16 @@
+import React from "react"
 import SidebarMenuMain from "./SidebarMenuMain"
 
-const Sidebar = () => {
-    return (
-        <div>
+interface SidebarType {
+    sidebarMenuRef: React.MutableRefObject<HTMLElement | null>
+}
 
-            <SidebarMenuMain />
-        </div>
+const Sidebar = ({ sidebarMenuRef }: SidebarType) => {
+    return (
+        <>
+
+            <SidebarMenuMain sidebarMenuRef={sidebarMenuRef} />
+        </>
     )
 }
 
