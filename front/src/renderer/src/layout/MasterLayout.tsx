@@ -6,10 +6,12 @@ import Sidebar from "./Sidebar/Sidebar"
 import { Outlet } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 
-
 const MasterLayout = (): JSX.Element => {
 
+  console.log(import.meta.env);
+  
 
+  
   const sidebarMenuRef = useRef<HTMLElement | null>(null);
 
   const [checkClass, setCheckClass] = useState<boolean>(false)

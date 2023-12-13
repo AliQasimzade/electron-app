@@ -48,7 +48,7 @@ const Register = (): JSX.Element => {
         onSubmit: async (values: RegisterFields): Promise<void> => {
 
             try {
-                const request = await api.post('users', { ...values, image: values.image === '' ? null : values.image.split(',')[1], phone: values.phone === '' ? null : values.phone });
+                const request = await api.post('users', { ...values, image: values.image, phone: values.phone === '' ? null : values.phone });
 
                 if (request.status === 201) {
                     toast.success(request.data?.message);
