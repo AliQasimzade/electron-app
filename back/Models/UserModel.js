@@ -32,7 +32,7 @@ const User = new UserSchema({
     basket:{
          type:Array,
          require: false,
-         defaul: []
+         default: []
     }
 }, { timestamps: true })
 
