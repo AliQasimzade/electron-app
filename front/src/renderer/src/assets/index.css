@@ -63867,6 +63867,14 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown 
 }
 
 @font-face {
+    font-family: "Font Awesome 6 Free";
+    src: url(fonts/keenicons/fa-solid-900.ttf);
+    src: url(fonts/keenicons/fa-solid-900.ttf) format("embedded-opentype"),url(fonts/keenicons/fa-solid-900.ttf) format("truetype"),url(fonts/keenicons/fa-solid-900.ttf) format("ttf"),url(fonts/keenicons/fa-solid-900.ttf) format("ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block
+}
+@font-face {
     font-family: keenicons-duotone;
     src: url(fonts/keenicons/keenicons-duotone.ttf);
     src: url(fonts/keenicons/keenicons-duotone.ttf) format("embedded-opentype"),url(fonts/keenicons/keenicons-duotone.ttf) format("truetype"),url(fonts/keenicons/keenicons-duotone.ttf) format("ttf"),url(fonts/keenicons/keenicons-duotone.ttf) format("ttf");
