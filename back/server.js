@@ -6,7 +6,11 @@ import UsersRouter from './Routers/UsersRouters.js'
 import BooksRouter from './Routers/BooksRouters.js'
 import BasketRouter from './Routers/BasketRouters.js';
 import bodyParser from 'body-parser';
+import path from 'path';
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
@@ -22,8 +26,15 @@ app.use((req, res, next) => {
     }
     next()
 })
-app.use(express.json());
-app.use(bodyParser.json());
+
+app.use('/images', express.static(path.join(__dirname, '/Controllers/images')));
+app.use(express.json({limit:'500mb'}));
+
+app.use(bodyParser.json({limit:'500mb', type:'application/json'}))
+app.use(bodyParser.urlencoded({
+    extended: true,
+    limit: '500mb'
+}));
 
 //services
 app.use(UsersRouter);
