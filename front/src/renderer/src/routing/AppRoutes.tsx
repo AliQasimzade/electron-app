@@ -1,11 +1,10 @@
 import { lazy, Suspense } from "react"
 import { Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
-import { HashRouter as Router } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import Loader from "@renderer/layout/loading/Loader";
 import App from "@renderer/App";
 import ResetPassword from "@renderer/pages/ResetPassword";
-const { BASE_URL } = import.meta.env
 // import { useAppSelector } from "@renderer/redux-store/store";
 import NotFound from "@renderer/pages/NotFound";
 const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
@@ -18,9 +17,8 @@ const AppRoutes = () => {
 
     // const user = useAppSelector((state: any) => state.persistedReducer.user.user)
 
-
     return (
-        <Router basename={BASE_URL}>
+        <HashRouter>
             <Routes >
                 <Route element={<App />}>
                     {/* {
@@ -35,7 +33,7 @@ const AppRoutes = () => {
                     } */}
 
                     <Route path="/*" element={<PrivateRoutes />} />
-                    <Route index element={<Navigate to="/dashboard" />} />
+                    <Route index element={<Navigate to="/pos" />} />
                     <Route path="login" element={
                         <Suspense fallback={<Loader />}>
                             <Login />
@@ -53,7 +51,7 @@ const AppRoutes = () => {
                     <Route path="error/404" element={<NotFound />} />
                 </Route>
             </Routes>
-        </Router>
+        </HashRouter>
 
     )
 }

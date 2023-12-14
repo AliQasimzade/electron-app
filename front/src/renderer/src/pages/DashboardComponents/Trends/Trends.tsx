@@ -1,4 +1,3 @@
-import React from 'react'
 import DashboardItemHeader from '../DashboardItemHeader'
 import TrendsItems from './TrendsItems'
 

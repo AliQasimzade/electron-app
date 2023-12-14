@@ -32,9 +32,7 @@
     "build:linux": "npm run build && electron-builder --linux --config",
     "pack": "electron-builder --dir",
     "start": "electron-vite preview --outDir=out",
-    "dev": "electron-vite dev --outDir=out",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "dev": "electron-vite dev --outDir=out"
   },
   "electronWebpack": {
     "commonSourceDirectory": "common",
